@@ -58,34 +58,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := ledist
+BUILD_ARTIFACT_NAME := STM32F756ZG
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-ledist.elf \
+STM32F756ZG.elf \
 
 MAP_FILES += \
-ledist.map \
+STM32F756ZG.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-ledist.list \
+STM32F756ZG.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: ledist.elf secondary-outputs
+main-build: STM32F756ZG.elf secondary-outputs
 
 # Tool invocations
-ledist.elf ledist.map: $(OBJS) $(USER_OBJS) C:\Users\student01\STM32CubeIDE\workspace_1.14.1\ledist\STM32F756ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "ledist.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\student01\STM32CubeIDE\workspace_1.14.1\ledist\STM32F756ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ledist.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+STM32F756ZG.elf STM32F756ZG.map: $(OBJS) $(USER_OBJS) C:\Users\student01\STM32CubeIDE\workspace_1.14.1\STM32F756ZG\STM32F756ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "STM32F756ZG.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\student01\STM32CubeIDE\workspace_1.14.1\STM32F756ZG\STM32F756ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F756ZG.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -94,14 +94,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-ledist.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "ledist.list"
+STM32F756ZG.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "STM32F756ZG.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) default.size.stdout ledist.elf ledist.list ledist.map
+	-$(RM) STM32F756ZG.elf STM32F756ZG.list STM32F756ZG.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
